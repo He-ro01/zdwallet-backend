@@ -10,16 +10,14 @@ exports.register = async (req, res) => {
         console.log("Registering user...");
         console.log("Received details:", { name, surname, mobileNumber, username, email });
 
-      
-     
+
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
-            name,
-            surname,
+
             mobileNumber,
-            username,
-            email,
+
             password: hashedPassword,
             wallet: {
                 account_number: `PS-${Date.now()}`,
@@ -34,11 +32,9 @@ exports.register = async (req, res) => {
             token,
             user: {
                 id: user._id,
-                name: user.name,
-                surname: user.surname,
+
                 mobileNumber: user.mobileNumber,
-                username: user.username,
-                email: user.email,
+
                 wallet: user.wallet
             }
         });
